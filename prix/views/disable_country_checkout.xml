@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="hide_country_in_checkout" inherit_id="website_sale.address">
+        <xpath expr="//div[contains(@class,'form-group')][.//select[@name='country_id']]" position="attributes">
+            <attribute name="style">display:none !important;</attribute>
+        </xpath>
+    </template>
+</odoo>

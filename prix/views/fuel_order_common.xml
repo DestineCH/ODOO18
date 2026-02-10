@@ -1,0 +1,75 @@
+<odoo>
+  <template id="_fuel_order_form_common">
+
+    <form action="/mazout/create_order" method="post" id="custom_fuel_order_form">
+      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+      <input type="hidden" name="product_id" t-att-value="product.id"/>
+      <input type="hidden" name="add_qty" value="1000" class="o_hidden_add_qty"/>
+
+      <div class="form-group row mb-3">
+        <label class="col-form-label col-4" for="postal_code_input">Code Postal</label>
+        <div class="col-8">
+          <input type="text" name="postal_code" id="postal_code_input"
+                 class="form-control" placeholder="Ex: 4990"
+                 list="postal_codes"/>
+          <div id="postal_code_error" class="my-error-box d-none"></div>
+        </div>
+      </div>
+
+      <datalist id="postal_codes">
+        <option value="4990"/>
+        <option value="6960"/>
+      </datalist>
+
+      <div class="form-group row mb-3">
+        <label class="col-form-label col-4" for="fuel_quantity">Quantité (Litres)</label>
+        <div class="col-8">
+          <input type="number" name="fuel_quantity" id="fuel_quantity" class="form-control"
+                 min="500" value="1000" required="required"/>
+          <div id="fuel_quantity_error" class="text-danger small mt-1"></div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <strong>Prix Total Estimé:</strong>
+        <span class="h2">
+          <span class="oe_currency_value" id="dynamic_fuel_price">
+            <t t-out="current_price"/>
+          </span>
+        </span>
+      </div>
+
+      <hr/>
+
+      <div class="text-center mt-4">
+        <button type="button"
+          class="btn btn-primary btn-lg"
+          id="go_to_order_button"
+          disabled="disabled">
+            <i class="fa fa-lock"/> Commander
+        </button>
+      </div>
+      <div id="login_popup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Connexion requise</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Vous devez vous connecter ou créer un compte pour passer commande.</p>
+              <div class="d-flex gap-2">
+                <a href="/web/login" class="btn btn-primary">Se connecter</a>
+                <a href="/web/signup" class="btn btn-outline-secondary">Créer un compte</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+  </template>
+</odoo>

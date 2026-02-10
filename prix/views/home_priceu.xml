@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="homepage_priceU" inherit_id="website.homepage">
+    <xpath expr="//div[@id='wrap']" position="inside">
+      <section id="prix-mazout-spf"
+               style="
+                 position: absolute;
+                 top: 700px;       /* distance depuis le haut de la page */
+                 left: 50%;        /* position horizontale centrée */
+                 transform: translateX(-50%); /* recentrage horizontal */
+                 text-align: center;
+                 width: auto;
+               ">
+        <h2 style="
+              font-size: 1.8em;
+              color: #333;
+              margin-bottom: 0.5em;
+              border-bottom: 2px solid #007bff;
+              display: inline-block;
+              padding-bottom: 0.2em;
+              font-weight: 600;
+          ">
+          Prix officiel aujourd'hui
+        </h2>
+
+        <t t-set="product" t-value="request.env['product.template'].sudo().search([('default_code', '=', 'MAZOUT_STD')], limit=1)"/>
+
+        <p t-if="product" style="margin-top: 0.5em;">
+          <span style="
+              font-size: 2em;
+              color: #007bff;
+              font-weight: bold;
+              letter-spacing: 0.02em;
+          ">
+            <t t-esc="round((product.list_price + 0.02) * 1.21, 4)"/> €/L TVAc
+          </span>
+        </p>
+
+        <p t-elif="not product" style="color: red;">❌ Produit introuvable.</p>
+      </section>
+    </xpath>
+  </template>
+</odoo>

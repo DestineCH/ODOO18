@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Masquer complètement le champ province (state_id) sur la page adresse checkout -->
+    <template id="hide_state_for_belgium" inherit_id="website_sale.address">
+        <xpath expr="//div[.//select[@name='state_id']]" position="replace">
+            <!-- On remplace tout le bloc par rien -->
+        </xpath>
+    </template>
+</odoo>

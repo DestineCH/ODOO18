@@ -1,0 +1,76 @@
+<odoo>
+  <template id="mazout_signup_template" name="Signup with address for Mazout">
+    <t t-call="website.layout">
+      <div class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card p-4">
+              <h2>Créer un compte et confirmer l'adresse</h2>
+
+              <t t-if="error">
+                <div class="alert alert-danger" role="alert">
+                    <t t-esc="error"/>
+                </div>
+              </t>
+
+              <form action="/mazout/signup_with_address" method="POST">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="product_id" t-att-value="product_id"/>
+                <input type="hidden" name="fuel_quantity" t-att-value="fuel_quantity"/>
+                <input type="hidden" name="postal_code" t-att-value="postal_code"/>
+                <input type="hidden" name="ul" t-att-value="ul"/>
+
+                <div class="mb-3">
+                  <label class="form-label">Nom complet</label>
+                  <input type="text" name="name" class="form-control" required="required"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email (Servira de login)</label>
+                      <input type="email" name="email" class="form-control" required="required"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Téléphone / GSM (Pour la livraison)</label>
+                      <input type="tel" name="phone" class="form-control" required="required"/>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mot de passe</label>
+                  <input type="password" name="password" class="form-control" required="required"/>
+                </div>
+
+                <hr/>
+                <h5>Adresse de livraison</h5>
+
+                <div class="mb-3">
+                  <label class="form-label">Rue et numéro</label>
+                  <input type="text" name="street" class="form-control" required="required"/>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label class="form-label">Code postal</label>
+                    <input type="text" name="zip" class="form-control" t-att-value="default_zip" readonly="readonly"/>
+                  </div>
+                  <div class="col-md-8 mb-3">
+                    <label class="form-label">Ville</label>
+                    <input type="text" name="city" class="form-control" required="required"/>
+                  </div>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Confirmer et passer au paiement <i class="fa fa-chevron-right"/>
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>
